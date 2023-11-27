@@ -1,3 +1,28 @@
+# Food Ordering App 
+/**
+ * Low level planing
+ * NavBar
+ *  -Logo
+ *  -navitemes
+ * Body
+ *   -search bar
+ *   -cardcontainer
+ *      -card
+ *        -image
+ *        -name of res,star-rating,cuisine,delivary time
+ * Footer
+ *   -copyright
+ *   -links
+ *   -addresses
+ *   -contact
+ */
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

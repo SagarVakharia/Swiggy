@@ -1,18 +1,140 @@
-*{
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.192);
+  border-radius: 10px;
+  background-color: #5b1888;
+  color: #fff;
+}
+
+.HeaderLogo {
+  margin-left: 15px;
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+}
+
+.NavItems {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  padding: 5px 20px;
+}
+
+.NavItems > ul {
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  font-size: 20px; */
+  font-size: 24px;
+  display: flex;
+  list-style-type: none;
+}
+
+.NavItems > ul > li {
+  padding: 10px;
+  margin: 10px;
+}
+
+/* .NavItems > ul > li > Link :hover {
+  text-decoration: underline;
+}
+ */
+
+.Search {
+  padding: 10px;
+}
+
+.CardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: auto;
+  max-width: 100%;
+}
+
+.Card {
+  width: 220px;
+  height: 315px;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.192);
+  border-radius: 10px;
+}
+
+.Card:hover {
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.555);
+  cursor: pointer;
+}
+
+.CardLogo {
+  width: 100%;
+  height: 150px;
+  /* margin-left: 5px; */
+  border-radius: 10px;
+}
+
+.filter-btn {
+  position: relative;
+  left: 7px;
+  bottom: 2px;
+  margin: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: red;
+  border: 3px double;
+}
+
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-card {
+  width: 220px;
+  height: 315px;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
+
+.login {
+  position: relative;
+  top: 7px;
+  cursor: pointer;
+  height: 30px;
+  width: 65px;
+  margin-top: 15px;
+  color: red;
+  font-size: 15px;
+  font-weight: 600;
+  border: double red;
+}
+
+.filter{
+  display: flex;
+}
+/* * {
   margin: 6px;
   padding: 0px;
 }
-.Header{
+.Header {
   padding: 6px;
   display: flex;
   justify-content: space-between;
   border: 1px solid #5b1888;
   border-radius: 10px;
-  background-color: #5b1888; 
+  background-color: #5b1888;
   color: #fff;
   height: 80px;
 }
-.HeaderLogo{
+.HeaderLogo {
   position: relative;
   bottom: 8px;
   width: 70px;
@@ -20,22 +142,22 @@
   border-radius: 20px;
 }
 
-.NavItems{
+.NavItems {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.NavItems>ul{
+.NavItems > ul {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   list-style: none;
   font-size: 20px;
 }
-.Card{
+.Card {
   width: 200px;
-  height: 250px;
+  height: 290px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -43,12 +165,12 @@
   border-radius: 10px;
 }
 
-.Card:hover{
+.Card:hover {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.555);
   cursor: pointer;
 }
 
-.CardLogo{
+.CardLogo {
   width: 190px;
   height: 130px;
   position: relative;
@@ -56,14 +178,14 @@
   border-radius: 7px;
 }
 
-.CardContainer{
+.CardContainer {
   display: flex;
   flex-wrap: wrap;
- /*  justify-content: space-between; */
- column-gap: 10px;
+  /*  justify-content: space-between; 
+  column-gap: 10px;
 }
 
-.CardDescription{
+.CardDescription {
   text-align: left;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -72,10 +194,15 @@
   font-size: 0.8rem;
   position: relative;
   bottom: 30px;
-  
 }
 
-.Rating{
+.shopName {
+  padding-top: 10px;
+  position: relative;
+  top: 10px;
+}
+
+.Rating {
   display: flex;
   align-items: center;
   -webkit-box-align: center;
@@ -92,7 +219,7 @@
   top: -22px;
 }
 
-.DeliveryTime{
+.DeliveryTime {
   position: relative;
   left: 157px;
   font-weight: 500;
@@ -100,7 +227,7 @@
   color: red;
 }
 
-.cost{
+.cost {
   position: relative;
   bottom: 30px;
   font-weight: 300;
@@ -114,4 +241,3 @@ width: 10px;
 padding-top: 7.5px;
 margin-left: -4px;
 } */
-
