@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   // State variable
@@ -9,7 +10,6 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   // Whenever state variable updates, react triggers a reconciliation cycle(i.e. r-renders the component)
-
 
   //If no dependency array is given useEffect is called on every render
   // If dependency array is empty then useEffect is called only on initial render(just once).
@@ -52,7 +52,12 @@ const Body = () => {
 
               setFilteredRestaurants(filteredRestaurant);
             }}
-            style={{ backgroundColor: "mediumPurple", color: "white", marginLeft: "5px", border: "3px double"}}
+            style={{
+              backgroundColor: "mediumPurple",
+              color: "white",
+              marginLeft: "5px",
+              border: "3px double",
+            }}
           >
             Search
           </button>
@@ -73,10 +78,12 @@ const Body = () => {
       </div>
       <div className="CardContainer">
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard
+          <Link /* USE OF lINK COMPONENT -> When we click on any card it navigates to its menu page.Link is helping us do that */
             key={restaurant?.info.id}
-            resData={restaurant?.info}
-          />
+            to={"restaurants/" + restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant?.info} />
+          </Link>
         ))}
       </div>
     </div>
