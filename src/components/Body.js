@@ -1,5 +1,4 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -19,17 +18,19 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1458004&lng=79.0881546&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.153183&lng=79.129796&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json);
     //To keep API URL in one variables
     const json_data =
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants; // Optional chaining
     setListOfRestaurants(json_data);
     setFilteredRestaurants(json_data);
   };
+console.log(listOfRestaurants);
+console.log(listOfRestaurants.length);
 
   //Conditional Rendering -->  Rendering on the basis of of condition
   return listOfRestaurants.length === 0 ? (
@@ -40,6 +41,7 @@ const Body = () => {
         <div className="search">
           <input
             type="text"
+            placeholder="Search here"
             className="search-box"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -57,6 +59,9 @@ const Body = () => {
               color: "white",
               marginLeft: "5px",
               border: "3px double",
+              marginTop: "5px",
+              height: "30px",
+              cursor: "pointer"
             }}
           >
             Search
@@ -67,7 +72,7 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating > 4
+              (res) => res.info.avgRating > 4.5
             );
             console.log(filteredList);
             setListOfRestaurants(filteredList);
@@ -78,7 +83,7 @@ const Body = () => {
       </div>
       <div className="CardContainer">
         {filteredRestaurants.map((restaurant) => (
-          <Link /* USE OF lINK COMPONENT -> When we click on any card it navigates to its menu page.Link is helping us do that */
+          <Link  className="linkcss"/* USE OF LINK COMPONENT -> When we click on any card it navigates user to menu page of that restaurant without loading it. Link is helping us do that */
             key={restaurant?.info.id}
             to={"restaurants/" + restaurant.info.id}
           >

@@ -1,6 +1,6 @@
 import { CDN_URL } from "../utils/constants";
 
-const RestrauntCard = (props) => {
+const RestaurantCard = (props) => {
   const { resData } = props;
   var {
     name,
@@ -18,7 +18,7 @@ const RestrauntCard = (props) => {
         alt="cardLogo"
       />
       <h3>{name}</h3>
-      <h4>{cuisines.join(", ")}</h4>{/* the join here is used for comma seperating the values */}
+      <h4 className="cuisines">{cuisines.join(", ")}</h4>{/* the join here is used for comma seperating the values */}
       <h4>{avgRating} stars</h4>
       <h4>{costForTwo}</h4>
       <h4>{sla.slaString}</h4>
@@ -26,4 +26,4 @@ const RestrauntCard = (props) => {
   );
 };
 
-export default RestrauntCard;
+export default RestaurantCard;
