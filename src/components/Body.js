@@ -1,7 +1,9 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, {Discount} from "./RestaurantCard";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/userContext";
 
 const Body = () => {
   // State variable
@@ -10,27 +12,40 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   // Whenever state variable updates, react triggers a reconciliation cycle(i.e. r-renders the component)
 
-  //If no dependency array is given useEffect is called on every render
-  // If dependency array is empty then useEffect is called only on initial render(just once).
+  const {loggedInUser, setUserName} = useContext(UserContext);
+
+  const Offer =  Discount(RestaurantCard) // Using High order component 
+
+
   useEffect(() => {
     fetchData();
   }, []);
+  //If no dependency array is given useEffect is called on every render
+  // If dependency array is empty then useEffect is called only on initial render(just once).
 
+  
+  /**
+   * @param
+   */
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.153183&lng=79.129796&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
+
     const json = await data.json();
-    console.log(json);
+    
     //To keep API URL in one variables
     const json_data =
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants; // Optional chaining
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants; // Optional chaining
+
     setListOfRestaurants(json_data);
     setFilteredRestaurants(json_data);
   };
-console.log(listOfRestaurants);
-console.log(listOfRestaurants.length);
+
+
+  const onlineStatus = useOnlineStatus();
+  if(onlineStatus === false) return <h1>You are offline!! Check your connection</h1>
+
 
   //Conditional Rendering -->  Rendering on the basis of of condition
   return listOfRestaurants.length === 0 ? (
@@ -61,7 +76,8 @@ console.log(listOfRestaurants.length);
               border: "3px double",
               marginTop: "5px",
               height: "30px",
-              cursor: "pointer"
+              cursor: "pointer",
+              opacity: "0.7",
             }}
           >
             Search
@@ -80,6 +96,10 @@ console.log(listOfRestaurants.length);
         >
           Top rated restaurant
         </button>
+        <div style={{marginLeft: "10px"}}>
+          <label>Username -</label>
+          <input className="username" value ={loggedInUser} onChange={(e) => setUserName(e.target.value)}/>
+        </div>
       </div>
       <div className="CardContainer">
         {filteredRestaurants.map((restaurant) => (
@@ -87,7 +107,8 @@ console.log(listOfRestaurants.length);
             key={restaurant?.info.id}
             to={"restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant?.info} />
+            {/* If restaurant has rating > 4.4 then show Discount offer  */}
+           {restaurant.info.avgRating > 4.4 ? <Offer resData={restaurant?.info}/>:<RestaurantCard resData={restaurant?.info} />} 
           </Link>
         ))}
       </div>

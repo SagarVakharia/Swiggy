@@ -1,61 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { Menu_Url } from "../utils/constants";
+import useMenu from "../utils/useMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const Menu = () => {
-  const [resInfo, setResInfo] = useState(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   const resId = useParams();
   // console.log("Params data : ", resId);
+  const [showMenuIndex, setShowMenuIndex] = useState(null);
 
-  useEffect(() => {
-    fetchMenu();
-  },[]);
-
-  const fetchMenu = async () => {
-    const data = await fetch(Menu_Url + resId.resId); // API call for menu of each url
-    const json = await data.json();
-    console.log(json);
-    setResInfo(json.data);
-  };
+  const resInfo = useMenu(resId);
 
   if (resInfo === null) return <Shimmer />;
 
   const { name, cuisines, costForTwoMessage } =
-    resInfo?.cards[0]?.card?.card?.info;
+    resInfo?.cards[2]?.card?.card?.info || {};
 
-  const { itemCards } =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-  console.log("Item Cards : ", itemCards);
+  /**
+   * To filter all the ItemCategories
+   */
+  const categories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    ); // @ is not allowed so this is how we can write it
 
   return (
     resInfo && (
       <div className="menu">
-        <h1>{name}</h1>
-        <p>
+        <h1 className="menu-heading-text">{name}</h1>
+        <h3 className="menu-heading-text">
           {cuisines.join(",")} - {costForTwoMessage}
-        </p>
-        <h2>Menu</h2>
-        <button className="recommended" onClick={toggleMenu}>Recommended ▼</button>
-        {/* Display the menu only if isMenuOpen is true */}
-        {isMenuOpen && (
-          <div>
-            <ul>
-          {itemCards.map((item) => (
-            <li key={item.card.info.id}>
-              {item.card.info.name} - Rs.
-              {item.card.info.defaultPrice / 100 || item.card.info.price / 100}
-            </li>
-          ))}
-        </ul>
-          </div>
-        )}
+        </h3>
+        {categories.map((category, index) => (
+          //Controlled component
+          <RestaurantCategory
+            key={category.card.card.title}
+            data={category?.card?.card}
+            isMenuOpen={index === showMenuIndex ? true : false}
+            setShowMenuIndex ={() => setShowMenuIndex(index)}
+          />
+        ))}
       </div>
     )
   );

@@ -1,11 +1,9 @@
 * {
   margin: 0px;
-  /* padding: 0px; */
   text-decoration: none;
   color: inherit;
-
 }
- /*-------------------------------------------------- Header CSS --------------------------------------------------- */
+
 .Header {
   display: flex;
   justify-content: space-between;
@@ -58,8 +56,6 @@
   border: double red;
 }
 
-/*-------------------------------------------------- Header CSS  ends--------------------------------------------------- */
-
 .Search {
   padding: 10px;
   margin-right: 10px;
@@ -67,10 +63,7 @@
 
 .search-box {
   height: 20px;
-
 }
-
-/* ------------------------------------------------- Card CSS ---------------------------------------------------------- */
 
 .CardContainer {
   display: flex;
@@ -98,11 +91,10 @@
 .CardLogo {
   width: 100%;
   height: 150px;
-  /* margin-left: 5px; */
   border-radius: 10px;
 }
 
-.cuisines{
+.cuisines {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -123,9 +115,6 @@
   background-color: #f0f0f0;
 }
 
-
-/* ------------------------------------------------- Card CSS Ends ---------------------------------------------------------- */
-
 .filter-btn {
   position: relative;
   left: 7px;
@@ -136,20 +125,53 @@
   background-color: red;
   border: 3px double;
   height: 30px;
+  opacity: 0.7;
 }
 
-.filter{
+.username{
+  position: relative;
+  left: 7px;
+  bottom: 2px;
+  margin: 7px;
+  cursor: pointer;
+  border: 1px solid;
+  height: 25px;
+  opacity: 0.7;
+  box-shadow: 1px 1px 1px 1px blue;
+}
+
+.filter {
   display: flex;
   margin-left: 37%;
 }
 
-.menu{
+.menu {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-.recommended {
-  padding: 10px 50px;
-  background-color: white;
+.menu-heading-text{
+  color: mediumslateblue;
+}
+
+.accordion-container{
+  padding: 15px;
+  width: 800px;
+  border: 1px solid rgb(194, 198, 206);
+  box-shadow:  1px 1px 1px 1px #5b1888;
+  border-radius: 20px;
+}
+
+.accordion-inner-container{
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .user-card {
@@ -157,4 +179,38 @@
   width: 92%;
   border: 1px solid black;
   margin-left: 30px;
+}
+
+.menu-item-list{
+  border-bottom: 1px solid gray;
+  line-height: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-list-item-image{
+  height: 100px;
+  width: 190px;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.menu-item-list-title{
+  font-size: 16px;
+  font-weight: bold;
+}
+.menu-item-list-description{
+  font-size: 14px;
+  color: grey;
+}
+
+.menu-list-item-button{
+  padding: 4px;
+  border: none;
+  background-color: lightyellow;
+  box-shadow: 1px 1px 1px 1px rgb(73, 175, 73);
+  color: rgb(73, 175, 73);
+  font-weight: 700;
+  border-radius: 4px;
+  margin: 95px 85px;
 }
