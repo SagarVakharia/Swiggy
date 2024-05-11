@@ -17,6 +17,7 @@ const About = lazy(() => import('./components/About'))
 
 const  App = () => {
   const [userName, setUserName] = useState();
+  
 
   //hardcoding authentication to update UserContext value
   useEffect(() => {
